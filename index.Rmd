@@ -41,7 +41,51 @@ d_times <- d_times %>%
     user_name, description) %>% 
   arrange(task_name, time_start)
 ```
-## my-rad-team {.tabset}
+
+
+Overall our project is over budget because we finished our tasks faster than the number of hours we estimated it would take. 
+
+The burndown for our Literature Review task starts off with 10 hours and only uses up 1 hour total. Thus, this task took less time than originally estimated.
+```{r}
+time_lit_review <- d_times %>% 
+  filter(task_name == 'Literature Review') %>% 
+  summarise(sum(duration_hrs))
+
+time_lit_review
+```
+
+The burndown for the Data Acquisition task starts off with 10 hours, but we only spent 7.166667 hours on it. Thus, this task took less time than originally estimated 3.84 hours over budget.
+
+```{r}
+time_Data_Acquisition <- d_times %>% 
+  filter(task_name == 'Data Acquisition') %>% 
+  summarise(sum(duration_hrs))
+
+time_Data_Acquisition
+```
+
+The burndown for the Model Task starts off with 10 hours, which was under budget becuase it took 11 hours before it gets burned, so the task was not on target with budget.
+
+```{r}
+time_model <- d_times %>% 
+  filter(task_name == 'Model') %>% 
+  summarise(sum(duration_hrs))
+
+time_model
+```
+
+The burndown for the Communicate Task starts off with 10 hours, which was under budget becuase it took 1.166667 hours to get it done, so the task was on target with budget.
+
+```{r}
+time_communicate <- d_times %>% 
+  filter(task_name == 'Communicate') %>% 
+  summarise(sum(duration_hrs))
+
+time_communicate
+```
+
+## crcm-science {.tabset}
+
 
 ### Overall
 
@@ -57,18 +101,70 @@ plot_burndown(
 datatable(d_times)
 ```
 
-### 1. Import
+### 1. Literature Review
 
 ```{r}
-task <- "1. Import"
+task <- "Literature Review"
 d_task <- d_times %>% 
   filter(task_name == !!task)
 plot_burndown(
   d_task,
-  beg = as.Date("2021-10-02"), # day before
-  end = as.Date("2021-10-12"), # day after
+  beg = as.Date("2021-10-31"), # day before
+  end = as.Date("2021-11-02"), # day after
   hrs = 10)
 
 datatable(d_task)
 ```
 
+### 2. Data Acquisition
+
+```{r}
+task <- "Data Acquisition"
+d_task <- d_times %>% 
+  filter(task_name == !!task)
+plot_burndown(
+  d_task,
+  beg = as.Date("2021-11-01"), # day before
+  end = as.Date("2021-11-05"), # day after
+  hrs = 10)
+
+datatable(d_task)
+
+```
+
+### 3. Model 
+
+```{r}
+task <- "Model"
+d_task <- d_times %>% 
+  filter(task_name == !!task)
+plot_burndown(
+  d_task,
+  beg = as.Date("2021-10-01"), # day before
+  end = as.Date("2021-10-31"), # day after
+  hrs = 10)
+
+datatable(d_task)
+```
+
+
+
+### 4. Communicate 
+
+```{r}
+task <- "Communicate"
+d_task <- d_times %>% 
+  filter(task_name == !!task)
+plot_burndown(
+  d_task,
+  beg = as.Date("2021-11-01"), # day before
+  end = as.Date("2021-11-03"), # day after
+  hrs = 10)
+
+datatable(d_task)
+```
+
+```{r}
+# table ALL
+datatable(d_times)
+```
